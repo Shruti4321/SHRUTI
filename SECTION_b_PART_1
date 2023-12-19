@@ -1,5 +1,4 @@
 
-
 #!/bin/bash
 
 if [ "$1" == "cpu" ] && [ "$2" == "getinfo" ]; then
