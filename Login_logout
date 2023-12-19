@@ -1,1 +1,43 @@
 
+user_db = {
+    'user1': 'password1',
+    'user2': 'password2'
+}
+
+# Function to simulate user registration
+def register(username, password):
+    if username not in user_db:
+        user_db[username] = password
+        print(f"User {username} registered successfully.")
+    else:
+        print("Username already exists. Please choose a different one.")
+
+# Function to simulate user login
+def login(username, password):
+    if username in user_db and user_db[username] == password:
+        print(f"Welcome, {username}! You are now logged in.")
+        return True
+    else:
+        print("Invalid username or password.")
+        return False
+
+# Function to simulate user logout
+def logout():
+    print("You have been logged out.")
+
+# Registration
+register('user3', 'password3')  # Example user registration
+
+# Login
+username_input = input("Enter your username: ")
+password_input = input("Enter your password: ")
+
+logged_in = login(username_input, password_input)
+if logged_in:
+    # Perform actions for logged-in users here
+    # For example:
+    # Do something after login
+    logout()
+else:
+    print("Login unsuccessful.")
+
