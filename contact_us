@@ -1,1 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Us</title>
+</head>
+<body>
+    <h1>Contact Us</h1>
+    <form method="post" action="/contact">
+        <label for="name">First Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="name">Last Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="email">Business Email id:</label><br>
+        <input type="email" id="email" name="email"><br>
+        <label for="name">Company:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <input type="number" id="phone no." name="name"><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message"></textarea><br>
+        <input type="submit" value="Next">
+    </form>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+</head>
+<body>
+    <h1>Welcome to our Website</h1>
+    <p>Feel free to contact us!</p>
+    <a href="/contact">Contact Us</a>
+</body>
+</html>
 
