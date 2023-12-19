@@ -1,7 +1,1 @@
-#!/bin/bash
 
-if [ "$1" == "memory" ] && [ "$2" == "getinfo" ]; then
-    free
-else
-    echo "Usage: $0 memory getinfo"
-fi
