@@ -1,1 +1,36 @@
+#!/bin/bash
 
+if [ "$1" == "user" ] && [ "$2" == "create" ] && [ -n "$3" ]; then
+    # Check if the user already exists
+    if id "$3" &>/dev/null; then
+        echo "User $3 already exists."
+    else
+        # Create the new user
+        useradd -m "$3"
+        
+        # Set a password for the new user
+        passwd "$3"
+        
+        echo "User $3 created successfully."
+    fi
+else
+    echo "Usage: $0 user create <username>"
+fi
+
+./internsctl user create <username>
+
+#!/bin/bash
+
+if [ "$1" == "user" ] && [ "$2" == "list" ]; then
+    if [ "$3" == "--sudo-only" ]; then
+        # List users with sudo permissions
+        getent passwd | awk -F: '$3 >= 1000 && $3 < 65534 {print $1}' | xargs -I {} id -nG {} | grep -w sudo | cut -d' ' -f1
+    else
+        # List all regular users
+        getent passwd | awk -F: '$3 >= 1000 && $3 < 65534 {print $1}'
+    fi
+else
+    echo "Usage: $0 user list [--sudo-only]"
+fi
+
+./internsctl user list --sudo-only
