@@ -1,7 +1,21 @@
+I want to get cpu information of my server through the following command:
+$ internsctl cpu getinfo
+
 #!/bin/bash
 
 if [ "$1" == "cpu" ] && [ "$2" == "getinfo" ]; then
     lscpu
 else
     echo "Usage: $0 cpu getinfo"
+fi
+
+I want to get memory information of my server through the following command:
+$ internsctl memory getinfo
+
+#!/bin/bash
+
+if [ "$1" == "memory" ] && [ "$2" == "getinfo" ]; then
+    free
+else
+    echo "Usage: $0 memory getinfo"
 fi
