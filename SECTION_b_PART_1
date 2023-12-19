@@ -1,0 +1,7 @@
+#!/bin/bash
+
+if [ "$1" == "cpu" ] && [ "$2" == "getinfo" ]; then
+    lscpu
+else
+    echo "Usage: $0 cpu getinfo"
+fi
