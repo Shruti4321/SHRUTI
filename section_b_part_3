@@ -1,0 +1,264 @@
+#!/bin/bash
+
+if [ "$1" == "file" ] && [ "$2" == "getinfo" ] && [ -n "$3" ]; then
+    file_name="$3"
+    
+    # Check if the file exists
+    if [ -e "$file_name" ]; then
+        # Get file information
+        file_info=$(stat -c "File: %n%nAccess: %A%nSize(B): %s%nOwner: %U%nModify: %y" "$file_name")
+        
+        # Print the file information
+        echo -e "$file_info"
+    else
+        echo "File not found: $file_name"
+    fi
+else
+    echo "Usage: $0 file getinfo <file-name>"
+fi
+
+./internsctl file getinfo <file-name>
+
+#!/bin/bash
+
+if [ "$1" == "file" ] && [ "$2" == "getinfo" ] && [ -n "$3" ]; then
+    file_name="$3"
+    
+    # Check if the file exists
+    if [ -e "$file_name" ]; then
+        # Define default values for options
+        print_size=false
+        print_permissions=false
+        print_owner=false
+        print_last_modified=false
+        
+        # Process options
+        while [[ $# -gt 3 ]]; do
+            case "$4" in
+                --size | -s)
+                    print_size=true
+                    ;;
+                --permissions | -p)
+                    print_permissions=true
+                    ;;
+                --owner | -o)
+                    print_owner=true
+                    ;;
+                --last-modified | -m)
+                    print_last_modified=true
+                    ;;
+                *)
+                    echo "Invalid option: $4"
+                    exit 1
+                    ;;
+            esac
+            shift
+        done
+        
+        # Get file information
+        file_info=$(stat -c "File: %n" "$file_name")
+        
+        # Check and append requested information
+        $print_size && file_info+="\nSize(B): $(stat -c %s "$file_name")"
+        $print_permissions && file_info+="\nAccess: $(stat -c %A "$file_name")"
+        $print_owner && file_info+="\nOwner: $(stat -c %U "$file_name")"
+        $print_last_modified && file_info+="\nModify: $(stat -c %y "$file_name")"
+        
+        # Print the file information
+        echo -e "$file_info"
+    else
+        echo "File not found: $file_name"
+    fi
+else
+    echo "Usage: $0 file getinfo [options] <file-name>"
+    echo "Options:"
+    echo "  --size, -s               Print size"
+    echo "  --permissions, -p       Print file permissions"
+    echo "  --owner, -o             Print file owner"
+    echo "  --last-modified, -m     Print last modified time"
+fi
+
+
+#!/bin/bash
+
+if [ "$1" == "file" ] && [ "$2" == "getinfo" ] && [ -n "$3" ]; then
+    file_name="$3"
+    
+    # Check if the file exists
+    if [ -e "$file_name" ]; then
+        # Define default values for options
+        print_size=false
+        print_permissions=false
+        print_owner=false
+        print_last_modified=false
+        
+        # Process options
+        while [[ $# -gt 3 ]]; do
+            case "$4" in
+                --size | -s)
+                    print_size=true
+                    ;;
+                --permissions | -p)
+                    print_permissions=true
+                    ;;
+                --owner | -o)
+                    print_owner=true
+                    ;;
+                --last-modified | -m)
+                    print_last_modified=true
+                    ;;
+                *)
+                    echo "Invalid option: $4"
+                    exit 1
+                    ;;
+            esac
+            shift
+        done
+        
+        # Get file information
+        file_info=""
+        
+        # Check and append requested information
+        $print_size && file_info+="$(stat -c %s "$file_name")"
+        $print_permissions && file_info+="\nAccess: $(stat -c %A "$file_name")"
+        $print_owner && file_info+="\nOwner: $(stat -c %U "$file_name")"
+        $print_last_modified && file_info+="\nModify: $(stat -c %y "$file_name")"
+        
+        # Print the requested information
+        echo -e "$file_info"
+    else
+        echo "File not found: $file_name"
+    fi
+else
+    echo "Usage: $0 file getinfo [options] <file-name>"
+    echo "Options:"
+    echo "  --size, -s               Print size"
+    echo "  --permissions, -p       Print file permissions"
+    echo "  --owner, -o             Print file owner"
+    echo "  --last-modified, -m     Print last modified time"
+fi
+
+./internsctl file getinfo --size hello.txt
+
+#!/bin/bash
+
+if [ "$1" == "file" ] && [ "$2" == "getinfo" ] && [ -n "$3" ]; then
+    file_name="$3"
+    
+    # Check if the file exists
+    if [ -e "$file_name" ]; then
+        # Define default values for options
+        print_size=false
+        print_permissions=false
+        print_owner=false
+        print_last_modified=false
+        
+        # Process options
+        while [[ $# -gt 3 ]]; do
+            case "$4" in
+                --size | -s)
+                    print_size=true
+                    ;;
+                --permissions | -p)
+                    print_permissions=true
+                    ;;
+                --owner | -o)
+                    print_owner=true
+                    ;;
+                --last-modified | -m)
+                    print_last_modified=true
+                    ;;
+                *)
+                    echo "Invalid option: $4"
+                    exit 1
+                    ;;
+            esac
+            shift
+        done
+        
+        # Get file information
+        file_info=""
+        
+        # Check and append requested information
+        $print_size && file_info+="Size(B): $(stat -c %s "$file_name")\n"
+        $print_permissions && file_info+="Access: $(stat -c %A "$file_name")"
+        $print_owner && file_info+="\nOwner: $(stat -c %U "$file_name")"
+        $print_last_modified && file_info+="\nModify: $(stat -c %y "$file_name")"
+        
+        # Print the requested information
+        echo -e "$file_info"
+    else
+        echo "File not found: $file_name"
+    fi
+else
+    echo "Usage: $0 file getinfo [options] <file-name>"
+    echo "Options:"
+    echo "  --size, -s               Print size"
+    echo "  --permissions, -p       Print file permissions"
+    echo "  --owner, -o             Print file owner"
+    echo "  --last-modified, -m     Print last modified time"
+fi
+
+./internsctl file getinfo --permissions hello.txt
+
+
+#!/bin/bash
+
+if [ "$1" == "file" ] && [ "$2" == "getinfo" ] && [ -n "$3" ]; then
+    file_name="$3"
+    
+    # Check if the file exists
+    if [ -e "$file_name" ]; then
+        # Define default values for options
+        print_size=false
+        print_permissions=false
+        print_owner=false
+        print_last_modified=false
+        
+        # Process options
+        while [[ $# -gt 3 ]]; do
+            case "$4" in
+                --size | -s)
+                    print_size=true
+                    ;;
+                --permissions | -p)
+                    print_permissions=true
+                    ;;
+                --owner | -o)
+                    print_owner=true
+                    ;;
+                --last-modified | -m)
+                    print_last_modified=true
+                    ;;
+                *)
+                    echo "Invalid option: $4"
+                    exit 1
+                    ;;
+            esac
+            shift
+        done
+        
+        # Get file information
+        file_info=""
+        
+        # Check and append requested information
+        $print_size && file_info+="Size(B): $(stat -c %s "$file_name")\n"
+        $print_permissions && file_info+="Access: $(stat -c %A "$file_name")\n"
+        $print_owner && file_info+="Owner: $(stat -c %U "$file_name")"
+        $print_last_modified && file_info+="\nModify: $(stat -c %y "$file_name")"
+        
+        # Print the requested information
+        echo -e "$file_info"
+    else
+        echo "File not found: $file_name"
+    fi
+else
+    echo "Usage: $0 file getinfo [options] <file-name>"
+    echo "Options:"
+    echo "  --size, -s               Print size"
+    echo "  --permissions, -p       Print file permissions"
+    echo "  --owner, -o             Print file owner"
+    echo "  --last-modified, -m     Print last modified time"
+fi
+
+./internsctl file getinfo --owner hello.txt
