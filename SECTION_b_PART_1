@@ -1,5 +1,4 @@
-I want to get cpu information of my server through the following command:
-$ internsctl cpu getinfo
+
 
 #!/bin/bash
 
@@ -9,8 +8,7 @@ else
     echo "Usage: $0 cpu getinfo"
 fi
 
-I want to get memory information of my server through the following command:
-$ internsctl memory getinfo
+
 
 #!/bin/bash
 
